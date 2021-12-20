@@ -1,36 +1,45 @@
 import java.util.*;
 
-public class Number_Conversion {
-    static String conversion(String number, int from, int to) {
-        return Integer.toString(Integer.parseInt(number, from), to);
+class number_converter {
+    char from;
+    char to;
+    String s;
+    int dec;
+
+    Q1(char a, char b, String c) {
+        this.from = a;
+        this.to = b;
+        this.s = c;
+    }
+
+    void convert() {
+        if (from == 'D') {
+            this.dec = Integer.parseInt(s);
+        } else if (from == 'O') {
+            this.dec = Integer.parseInt(s, 8);
+        } else if (from == 'H') {
+            this.dec = Integer.parseInt(s, 16);
+        } else if (from == 'B') {
+            this.dec = Integer.parseInt(s, 2);
+        }
+        if (to == 'B') {
+            System.out.println(Integer.toBinaryString(this.dec));
+        } else if (to == 'H') {
+            System.out.println(Integer.toHexString(this.dec));
+        } else if (to == 'O') {
+            System.out.println(Integer.toOctalString(this.dec));
+        } else if (to == 'D') {
+            System.out.println(this.dec);
+        }
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String fromStr = sc.next();
-        String toStr = sc.next();
-        String number = sc.next();
-        String[] strArr = {fromStr, toStr};
-        int[] numArr = {0, 0};
+        char from = sc.next().charAt(0);
+        char to = sc.next().charAt(0);
+        String s = sc.next();
+        Q1 q = new Q1(from, to, s);
+        q.convert();
 
-        for (int i = 0; i < strArr.length; i++) {
-            switch (strArr[i].toUpperCase()) {
-                case "B":
-                    numArr[i] = 2;
-                    break;
-                case "D":
-                    numArr[i] = 10;
-                    break;
-                case "O":
-                    numArr[i] = 8;
-                    break;
-                case "H":
-                    numArr[i] = 16;
-                default:
-                    break;
-            }
-        }
-
-        System.out.println(conversion(number, numArr[0], numArr[1]));
     }
 }
