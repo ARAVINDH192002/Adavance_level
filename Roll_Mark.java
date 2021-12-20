@@ -1,66 +1,56 @@
-import java.util.*;
+import java.util.Scanner;
 
-class Mark {
-    int rollNo;
+class Roll_no{
+    int roll;
     int m1;
     int m2;
     int m3;
 
-    Mark(int rollNo, int m1, int m2, int m3) {
-        this.rollNo = rollNo;
-        this.m1 = m1;
-        this.m2 = m2;
-        this.m3 = m3;
+    Q3(int a, int b, int c, int d) {
+        this.roll = a;
+        this.m1 = b;
+        this.m2 = c;
+        this.m3 = d;
     }
 
-    public int totalMark() {
-        return this.m1 + this.m2 + this.m3;
-    }
-
-    public int mark(int i) {
-        switch (i) {
-            case 1:
-                return this.m1;
-            case 2:
-                return this.m2;
-            case 3:
-                return this.m3;
-            default:
-                return -1;
-        }
-    }
-}
-
-class Mark_list {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        Mark[] markArr = new Mark[n];
-
-        for (int i = 0; i < markArr.length; i++) {
-            int rollNo = sc.nextInt();
+        Q3[] arr = new Q3[n];
+        for (int i = 0; i < n; i++) {
+            int r = sc.nextInt();
             int m1 = sc.nextInt();
             int m2 = sc.nextInt();
             int m3 = sc.nextInt();
-
-            markArr[i] = new Mark(rollNo, m1, m2, m3);
+            arr[i] = new Q3(r, m1, m2, m3);
         }
-
-        ArrayList<Integer> totMarkArr = new ArrayList<>();
-        for (int i = 0; i < markArr.length; i++) {
-            totMarkArr.add(markArr[i].totalMark());
-            System.out.println(markArr[i].totalMark());
-        }
-
-        for (int j = 0; j < 3; j++) {
-            int maxMark = 0, ind = 0;
-            for (Mark obj : markArr) {
-                maxMark = Math.max(maxMark, obj.mark(j + 1));
-                if (maxMark == obj.mark(j + 1)) ind = obj.rollNo;
+        int high = 0;
+        Q3 th = arr[0];
+        for (int i = 0; i < n; i++) {
+            int mark = arr[i].m1 + arr[i].m2 + arr[i].m3;
+            System.out.println(mark);
+            if (mark > high) {
+                high = mark;
+                th = arr[i];
             }
-            System.out.println(ind + " " + maxMark);
         }
-        int maxTot = Collections.max(totMarkArr);
-        System.out.println(totMarkArr.indexOf(maxTot) + 1 + " " + maxTot);
+        Q3 h1 = arr[0];
+        Q3 h2 = arr[0];
+        Q3 h3 = arr[0];
+        for (int i = 1; i < n; i++) {
+            if (arr[i].m1 > h1.m1) {
+                h1 = arr[i];
+            }
+            if (arr[i].m2 > h2.m2) {
+                h2 = arr[i];
+            }
+            if (arr[i].m3 > h3.m3) {
+                h3 = arr[i];
+            }
+        }
+        System.out.println(h1.roll + " " + h1.m1);
+        System.out.println(h2.roll + " " + h2.m2);
+        System.out.println(h3.roll + " " + h3.m3);
+        System.out.println(th.roll + " " + high);
     }
 }
