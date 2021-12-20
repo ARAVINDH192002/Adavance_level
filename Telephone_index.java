@@ -1,35 +1,28 @@
-import java.util.*;
+import java.util.Scanner;
 
-class Phonebook {
-    String name;
-    int number;
+class Telephone_index{
+    String n;
+    String ph;
 
-    Phonebook(String name, int number) {
-        this.name = name;
-        this.number = number;
+    Q4(String n, String ph) {
+        this.n = n;
+        this.ph = ph;
     }
 
-    void display() {
-        System.out.println(name + " " + number);
-    }
-}
-
-class Search_PhoneDirectory {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
-        int n = sc.nextInt();
-        Phonebook[] phArr = new Phonebook[n];
-
+        int n = Integer.parseInt(sc.nextLine());
+        Q4[] arr = new Q4[n];
         for (int i = 0; i < n; i++) {
-            String name = sc.next();
-            int number = sc.nextInt();
-            phArr[i] = new Phonebook(name, number);
+            String a = sc.nextLine();
+            String b = sc.nextLine();
+            arr[i] = new Q4(a, b);
         }
-        String find = sc.next();
-
-        for (Phonebook obj : phArr) {
-            if (obj.name.startsWith(find)) obj.display();
+        String s = sc.nextLine();
+        for (int i = 0; i < n; i++) {
+            if (arr[i].n.startsWith(s)) {
+                System.out.println(arr[i].n + " " + arr[i].ph);
+            }
         }
     }
 }
